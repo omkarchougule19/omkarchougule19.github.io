@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Omkar Kumar Chougule — Software Engineer</title>
+  <title>Omkar Kumar Chougule, Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -21,7 +21,7 @@
       --text:       #e8e0d4;
       --text-soft:  #c4b9aa;
       --text-muted: #7d7168;
-      --text-faint: #3e3830;
+      --text-faint: #7a6f62;
       /* Accent — warm amber-bronze */
       --gold:       #c9a96e;
       --gold-dim:   #c9a96e20;
@@ -57,6 +57,17 @@
     /* ═══════════════════════════════════════
        NAV
     ═══════════════════════════════════════ */
+    /* Scroll progress indicator */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), #e8cf9c);
+      z-index: 300;
+      transition: width 0.1s linear;
+    }
+
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--nav-h);
@@ -335,7 +346,21 @@
       aspect-ratio: 3 / 4;
       overflow: hidden;
       position: relative;
+      border: 1px solid var(--rule);
+      transition: transform 0.35s ease, border-color 0.35s ease;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
+    .photo-frame::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 0 1px var(--gold-rule);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .photo-frame:hover::after { opacity: 1; }
+    .photo-frame:hover { border-color: var(--gold-rule); }
     .photo-frame img {
       width: 100%;
       height: 100%;
@@ -345,7 +370,7 @@
       filter: sepia(12%) contrast(1.04) brightness(0.96);
       transition: transform 0.6s ease;
     }
-    .photo-frame:hover img { transform: scale(1.03); }
+    .photo-frame:hover img { transform: scale(1.05); }
     .photo-caption {
       margin-top: 0.9rem;
       text-align: center;
@@ -390,6 +415,8 @@
       background: var(--bg-card);
       padding: 1.75rem 1.5rem;
       transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
     }
     .stat-cell:hover { background: var(--bg-hover); }
     .stat-val {
@@ -482,8 +509,28 @@
       background: var(--bg-card);
       padding: 2rem;
       transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
     }
     .skill-cell:hover { background: var(--bg-hover); }
+    .skill-cell::before,
+    .project-cell::before,
+    .stat-cell::before {
+      content: '';
+      position: absolute;
+      top: var(--spot-y, 50%); left: var(--spot-x, 50%);
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(201,169,110,0.10) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .skill-cell:hover::before,
+    .project-cell:hover::before,
+    .stat-cell:hover::before {
+      opacity: 1;
+    }
     .skill-cell-title {
       font-size: 0.6rem;
       letter-spacing: 0.22em;
@@ -519,8 +566,11 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      transition: background 0.25s;
+      transition: background 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
     }
+    .project-cell:hover { transform: translateY(-3px); }
     .project-cell:hover { background: var(--bg-hover); }
     .proj-index {
       font-family: var(--serif);
@@ -536,6 +586,8 @@
       color: var(--text);
       line-height: 1.35;
     }
+    .proj-title a { color: inherit; border-bottom: 1px solid var(--gold-rule); transition: border-color 0.15s, color 0.15s; }
+    .proj-title a:hover { color: var(--gold); border-color: var(--gold); }
     .proj-desc {
       font-size: 0.83rem;
       color: var(--text-soft);
@@ -707,6 +759,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <!-- ═══ NAV ══════════════════════════════════════ -->
   <nav>
     <div class="nav-inner">
@@ -744,14 +798,14 @@
           <!-- EDIT: status -->
           <div class="hero-status">
             <span class="status-dot"></span>
-            Open to Spring–Fall 2026 Internships
+            Open to SWE / AI / FDE Internships &amp; Full-Time from May 2027
           </div>
           <!-- EDIT: name — <em> word gets italic gold -->
           <h1 class="hero-name">Omkar Kumar<br /><em>Chougule</em></h1>
           <!-- EDIT: role -->
-          <p class="hero-role">Full-Stack Software Engineer &amp; MSIM Candidate, UIUC</p>
+          <p class="hero-role">Full-Stack Software Engineer · AI-Accelerated Builder · MSIM Candidate, UIUC</p>
           <!-- EDIT: bio -->
-          <p class="hero-bio">4+ years building scalable distributed systems at Infosys. Now at UIUC's iSchool, merging engineering depth with product strategy and data-driven thinking.</p>
+          <p class="hero-bio">I spent 4+ years building distributed backend systems at Infosys, and now I ship full-stack products solo using Claude, Gemini, and LangChain every day. I like taking a messy, ambiguous problem and turning it into working software, start to finish.</p>
           <div class="hero-actions">
             <a href="#contact" class="btn-solid">
               <i data-feather="send" width="13" height="13"></i>
@@ -802,35 +856,35 @@
       <div class="about-grid">
         <div class="reveal">
           <!-- EDIT: about text -->
-          <p class="about-lead">Software engineer turned product thinker - building at the intersection of code, data, and business impact.</p>
+          <p class="about-lead">I'm a backend/systems engineer with AI-native build fluency, and I've also led product initiatives end to end, not just shipped against someone else's spec.</p>
           <div class="about-body">
-            <p>I spent four years at Infosys designing RESTful microservices, managing high-volume Kafka pipelines, and shipping production systems used at scale - learning to write clean, testable code and to mentor others in doing the same.</p>
-            <p>Now pursuing my MS in Information Management at UIUC, I'm channeling that engineering depth into product strategy - using data-informed analysis and systems thinking to define what to build, and why it matters.</p>
-            <p>Actively seeking Spring–Fall 2026 internships in software engineering, product management, or the space between.</p>
+            <p>I spent four years at Infosys engineering distributed backend systems and event-driven pipelines: RESTful microservices, Kafka-based async processing, and CI/CD via OpenShift, Docker, and Jenkins, for a large-scale banking and financial-services client. Along the way I mentored junior engineers and helped rebuild the team's incident-response process.</p>
+            <p>These days I'm pursuing my M.S. in Information Management at UIUC, and I use Claude, Gemini, and LangChain daily in my own build loop. I solo-designed and shipped a full-stack simulation product that real students actually use, and I build agentic and RAG systems on the side because I like understanding how they work under the hood. At UIUC I've also led two full-cycle product initiatives (BIG, Gies RA), from requirements discovery through a deployed prototype.</p>
+            <p>I'm actively looking for SWE, AI/ML, Data Engineering, and Forward-Deployed Engineering internships now, and full-time roles starting May 2027.</p>
           </div>
         </div>
         <div class="reveal">
           <div class="stats-block">
             <!-- EDIT: stats -->
             <div class="stat-cell">
-              <div class="stat-val">4+</div>
+              <div class="stat-val" data-count="4" data-suffix="+">0</div>
               <div class="stat-desc">Years in industry</div>
             </div>
             <div class="stat-cell">
-              <div class="stat-val">17</div>
+              <div class="stat-val" data-count="17" data-suffix="+">0</div>
               <div class="stat-desc">APIs engineered</div>
             </div>
             <div class="stat-cell">
-              <div class="stat-val">30%</div>
-              <div class="stat-desc">Faster systems</div>
+              <div class="stat-val" data-count="30" data-suffix="%">0</div>
+              <div class="stat-desc">Faster response times</div>
             </div>
             <div class="stat-cell">
-              <div class="stat-val">40%</div>
-              <div class="stat-desc">Less downtime</div>
+              <div class="stat-val" data-count="40" data-suffix="%">0</div>
+              <div class="stat-desc">Lower defect rate</div>
             </div>
             <div class="availability-bar">
               <i data-feather="check-circle" width="13" height="13"></i>
-              Open to work · Spring–Fall 2026 · Open to relocate
+              Open to work · Internships now, full-time from May 2027 · Open to relocate
             </div>
           </div>
         </div>
@@ -848,14 +902,45 @@
         <!-- EDIT: roles -->
         <div class="exp-item reveal">
           <div class="exp-left">
-            <div class="exp-company">Business Intelligence Group</div>
-            <div class="exp-date">Aug 2025 – Present<br />Part-time</div>
+            <div class="exp-company">University of Illinois Foundation</div>
+            <div class="exp-date">May 2026 – Present<br />On-site, Champaign, IL</div>
           </div>
           <div>
-            <div class="exp-role">Project Manager</div>
+            <div class="exp-role">Data Governance &amp; AI Intern</div>
             <ul class="exp-bullets">
-              <li>Selected to lead a cross-functional team on a large-scale enterprise initiative, owning the product end-to-end from planning through delivery.</li>
-              <li>Drive sprint planning, stakeholder alignment, and milestone delivery using Agile methodologies.</li>
+              <li>Maintain, standardize, and validate donor and constituent records in a live CRM using SQL and Excel, touching 200+ records/day, catching data-quality issues before they reach downstream reporting.</li>
+              <li>Apply data governance standards across the CRM, checking records against validation rules and documenting recurring data-quality issues so they get fixed at the source.</li>
+              <li>Designed and prototyped an AI-assisted data quality pipeline that flags likely bad or incomplete records before they propagate downstream.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-company">Gies College of Business, UIUC</div>
+            <div class="exp-date">Apr 2026 – Present<br />Hybrid</div>
+          </div>
+          <div>
+            <div class="exp-role">Research Assistant, Product Design &amp; AI Integration</div>
+            <ul class="exp-bullets">
+              <li>Independently designed and built <a href="https://supply-rush.onrender.com/" target="_blank" style="color:var(--gold); border-bottom:1px solid var(--gold-rule);">Supply Rush</a>, a full-stack supply-chain simulation (Python, FastAPI) used by a professor to teach students, owning the entire lifecycle solo through an AI-accelerated workflow using Claude, Google Antigravity, and Gemini daily, from ideation through live deployment.</li>
+              <li>Modeled truck/drone allocation and capacity planning under randomized disruptions, and built zone-based demand modeling and linear-programming benchmarks to validate outcomes against real usage.</li>
+              <li>Shipped KPI tracking, 10+ market events, and instructor customization features, iterating rapidly on direct professor feedback.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-left">
+            <div class="exp-company">Business Intelligence Group (BIG), UIUC</div>
+            <div class="exp-date">Jan 2026 – May 2026<br />Champaign, IL</div>
+          </div>
+          <div>
+            <div class="exp-role">Product &amp; Technology Lead</div>
+            <ul class="exp-bullets">
+              <li>Led a 6-person cross-functional team to own and deliver a full-stack proof of concept for a multi-university organization, from requirements discovery through deployed prototype.</li>
+              <li>Contributed hands-on full-stack development (React front end, Java REST APIs), deployed the POC to AWS EC2, and connected the database to Tableau for live reporting.</li>
+              <li>Built Python ETL pipelines and designed the database schema, hit a 95% milestone completion rate, and evaluated Snowflake as a candidate data platform during solution design.</li>
             </ul>
           </div>
         </div>
@@ -863,55 +948,29 @@
         <div class="exp-item reveal">
           <div class="exp-left">
             <div class="exp-company">Infosys</div>
-            <div class="exp-date">Aug 2022 – Aug 2025</div>
+            <div class="exp-date">Aug 2021 – Aug 2025<br />4 yr 1 mo</div>
           </div>
           <div>
-            <div class="exp-role">Software Developer</div>
+            <div class="exp-role">Software Development Engineer</div>
             <ul class="exp-bullets">
-              <li>Engineered 17 scalable backend APIs using Java/Spring Boot within a highly distributable system architecture; containerized with OpenShift & Docker, deployed via Jenkins CI/CD.</li>
-              <li>Leveraged Kafka for async messaging across distributed services, improving system responsiveness by 30% and ensuring data consistency at scale.</li>
-              <li>Authored comprehensive unit and integration tests; resolved production incidents cutting downtime by 40%.</li>
-              <li>Full SCRUM participation - sprint planning, stand-ups, retros. Mentored junior engineers on code quality and best practices.</li>
+              <li>Engineered 17+ REST APIs (Java, Spring Boot) in a distributed microservices architecture for a cross-currency fund transfer platform (staging/pre-production), with CI/CD via OpenShift, Docker, and Jenkins.</li>
+              <li>Introduced Kafka-based asynchronous event processing for workflow validations and notifications, cutting response times ~30% in performance testing.</li>
+              <li>Reduced the defect/incident rate ~40% via independently written unit/integration test coverage, and rebuilt the team's incident-response and root-cause troubleshooting process.</li>
+              <li>Took over sprint planning leadership for a 6-engineer team across 8 sprints at 95% velocity; authored API specs and onboarding runbooks that cut new-engineer ramp-up ~40%. Recognized with the Infosys Insta Award.</li>
             </ul>
           </div>
         </div>
 
         <div class="exp-item reveal">
           <div class="exp-left">
-            <div class="exp-company">Infosys</div>
-            <div class="exp-date">Aug 2021 – Aug 2022</div>
+            <div class="exp-company">IEEE Student Branch, Pune</div>
+            <div class="exp-date">Jul 2019 – Jul 2020</div>
           </div>
           <div>
-            <div class="exp-role">Junior Software Developer</div>
+            <div class="exp-role">Head of Programme Management</div>
             <ul class="exp-bullets">
-              <li>Built RESTful APIs with Spring Boot and Microservices - CRUD operations with Circuit Breaker, Service Registry, and Config Server for resilience and scalability.</li>
-              <li>Managed data persistence with JPA and MySQL; real-time event streaming via Kafka.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="exp-item reveal">
-          <div class="exp-left">
-            <div class="exp-company">IEEE SIT Student Branch</div>
-            <div class="exp-date">Jul 2019 – Jun 2021</div>
-          </div>
-          <div>
-            <div class="exp-role">Head of Programs Management</div>
-            <ul class="exp-bullets">
-              <li>Led teamwork, logistics management, and coordination for technical events and student programs.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="exp-item reveal">
-          <div class="exp-left">
-            <div class="exp-company">Technomous Govermax</div>
-            <div class="exp-date">Jun 2019 – Jul 2019</div>
-          </div>
-          <div>
-            <div class="exp-role">Student Intern</div>
-            <ul class="exp-bullets">
-              <li>Studied charge-current flow from power sources used to control report-generating robotic systems throughout the internship.</li>
+              <li>Planned and executed 15+ workshops/events for a 200-member organization with external industry speakers, averaging 50+ attendees.</li>
+              <li>Managed budgets combining internal funding and external sponsorships, and led an inherited 5-person coordinator team using OKRs.</li>
             </ul>
           </div>
         </div>
@@ -930,10 +989,13 @@
         <div class="skill-cell">
           <div class="skill-cell-title">Backend & APIs</div>
           <div class="skill-pills">
-            <span class="skill-pill">Java 8</span>
+            <span class="skill-pill">Java</span>
             <span class="skill-pill">Spring Boot</span>
+            <span class="skill-pill">Spring Cloud</span>
             <span class="skill-pill">Microservices</span>
             <span class="skill-pill">REST APIs</span>
+            <span class="skill-pill">FastAPI</span>
+            <span class="skill-pill">Node.js</span>
             <span class="skill-pill">Kafka</span>
             <span class="skill-pill">Redis</span>
           </div>
@@ -948,25 +1010,40 @@
           </div>
         </div>
         <div class="skill-cell">
-          <div class="skill-cell-title">Data & AI</div>
+          <div class="skill-cell-title">AI / LLM</div>
+          <div class="skill-pills">
+            <span class="skill-pill">LangChain</span>
+            <span class="skill-pill">RAG</span>
+            <span class="skill-pill">Vector DBs (ChromaDB)</span>
+            <span class="skill-pill">Prompt Engineering</span>
+            <span class="skill-pill">LLMs (Claude, Gemini, GPT)</span>
+            <span class="skill-pill">Agentic Workflows</span>
+            <span class="skill-pill">AI Security &amp; Evals (self-study)</span>
+          </div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-title">Data & Analytics</div>
           <div class="skill-pills">
             <span class="skill-pill">Python</span>
             <span class="skill-pill">SQL</span>
-            <span class="skill-pill">Power BI</span>
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">MongoDB</span>
             <span class="skill-pill">MySQL</span>
-            <span class="skill-pill">Firebase</span>
-            <span class="skill-pill">LLM Systems</span>
+            <span class="skill-pill">SQLite</span>
+            <span class="skill-pill">Power BI / DAX</span>
             <span class="skill-pill">Data Warehousing</span>
+            <span class="skill-pill">ETL</span>
           </div>
         </div>
         <div class="skill-cell">
           <div class="skill-cell-title">Cloud & DevOps</div>
           <div class="skill-pills">
-            <span class="skill-pill">AWS</span>
+            <span class="skill-pill">AWS (EC2)</span>
             <span class="skill-pill">Docker</span>
             <span class="skill-pill">OpenShift</span>
             <span class="skill-pill">Kubernetes</span>
             <span class="skill-pill">Jenkins</span>
+            <span class="skill-pill">CI/CD</span>
             <span class="skill-pill">Git</span>
             <span class="skill-pill">Azure</span>
           </div>
@@ -974,19 +1051,11 @@
         <div class="skill-cell">
           <div class="skill-cell-title">Product & Process</div>
           <div class="skill-pills">
-            <span class="skill-pill">Agile / SCRUM</span>
+            <span class="skill-pill">Agile / Scrum</span>
+            <span class="skill-pill">Stakeholder Alignment</span>
+            <span class="skill-pill">Roadmap Planning</span>
             <span class="skill-pill">Jira</span>
             <span class="skill-pill">Confluence</span>
-            <span class="skill-pill">Product Management</span>
-            <span class="skill-pill">Project Management</span>
-          </div>
-        </div>
-        <div class="skill-cell">
-          <div class="skill-cell-title">Languages</div>
-          <div class="skill-pills">
-            <span class="skill-pill">English</span>
-            <span class="skill-pill">Hindi</span>
-            <span class="skill-pill">Marathi</span>
           </div>
         </div>
       </div>
@@ -1002,34 +1071,62 @@
         <!-- EDIT: projects -->
         <div class="project-cell reveal">
           <div class="proj-index">01</div>
-          <div class="proj-title">JusMath - Aptitude Prep App</div>
+          <div class="proj-title"><a href="https://github.com/omkarchougule19/ragSystem" target="_blank">RAG Chatbot System</a></div>
+          <p class="proj-desc">Modular end-to-end RAG pipeline (Python, LangChain, ChromaDB) with document ingestion, OpenAI embeddings, vector storage, and conversational retrieval-augmented answers across 13 independently structured modules. Implements multi-query retrieval, reciprocal rank fusion, hybrid search, and cross-encoder reranking.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">LangChain</span>
+            <span class="proj-tag">ChromaDB</span>
+            <span class="proj-tag">RAG</span>
+          </div>
+        </div>
+        <div class="project-cell reveal">
+          <div class="proj-index">02</div>
+          <div class="proj-title"><a href="https://supply-rush.onrender.com/" target="_blank">Supply Rush</a></div>
+          <p class="proj-desc">A solo-built, live full-stack supply-chain simulation (Python, FastAPI) used by a professor to teach students. Includes truck/drone allocation, zone-based demand modeling, linear-programming benchmarks, KPI tracking, and 10+ market events.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">AI-Accelerated</span>
+          </div>
+        </div>
+        <div class="project-cell reveal">
+          <div class="proj-index">03</div>
+          <div class="proj-title"><a href="https://github.com/omkarchougule19/EV-Market-Intelligence-Analytics-System" target="_blank">EV Market Intelligence Analytics System</a></div>
+          <p class="proj-desc">Python ETL pipelines across multiple EV market datasets (Kaggle and public sources), feeding a Power BI data mart (star schema, DAX measures) for multi-dimensional analysis. Cut analysis turnaround by 40%.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">ETL</span>
+            <span class="proj-tag">Power BI</span>
+          </div>
+        </div>
+        <div class="project-cell reveal">
+          <div class="proj-index">04</div>
+          <div class="proj-title"><a href="https://github.com/omkarchougule19/course-explorer-agent" target="_blank">UIUC Course Explorer Data Agent</a></div>
+          <p class="proj-desc">Concurrent scraper and resumable, idempotent SQLite pipeline against UIUC's public Course Explorer API, exposed through a FastAPI backend. A LangChain agent on top answers plain-English questions by writing and executing its own SQL, with a documented scoped-access security tradeoff.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">FastAPI</span>
+            <span class="proj-tag">LangChain</span>
+            <span class="proj-tag">SQLite</span>
+          </div>
+        </div>
+        <div class="project-cell reveal">
+          <div class="proj-index">05</div>
+          <div class="proj-title">AI Product Strategy for Lululemon</div>
+          <p class="proj-desc">Led a cross-functional academic team developing a strategic AI implementation plan for a faculty client. Covered competitive analysis, issue tree decomposition, KPIs, and an 18-month phased delivery roadmap.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Product Strategy</span>
+            <span class="proj-tag">AI</span>
+          </div>
+        </div>
+        <div class="project-cell reveal">
+          <div class="proj-index">06</div>
+          <div class="proj-title">JusMath, Aptitude Prep App</div>
           <p class="proj-desc">Native Android application for student aptitude preparation. Firebase backend manages 500+ questions for 300+ users with quizzes, progress tracking, and performance analytics.</p>
           <div class="proj-tags">
             <span class="proj-tag">Java</span>
             <span class="proj-tag">Android</span>
             <span class="proj-tag">Firebase</span>
-            <span class="proj-tag">SQL</span>
-          </div>
-        </div>
-        <div class="project-cell reveal">
-          <div class="proj-index">02</div>
-          <div class="proj-title">Full-Stack E-Commerce Platform</div>
-          <p class="proj-desc">E-commerce platform with collaborative filtering recommendation engine correlating 100+ products. Includes a Power BI seller dashboard for KPI and inventory tracking.</p>
-          <div class="proj-tags">
-            <span class="proj-tag">React</span>
-            <span class="proj-tag">Java</span>
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">Power BI</span>
-          </div>
-        </div>
-        <div class="project-cell reveal">
-          <div class="proj-index">03</div>
-          <div class="proj-title">AI Product Strategy - Lululemon</div>
-          <p class="proj-desc">Led cross-functional academic team developing a strategic AI implementation plan. Competitive analysis, issue tree decomposition, KPIs, deliverables, and full scoping document.</p>
-          <div class="proj-tags">
-            <span class="proj-tag">Product Strategy</span>
-            <span class="proj-tag">AI</span>
-            <span class="proj-tag">PM</span>
           </div>
         </div>
       </div>
@@ -1048,11 +1145,11 @@
           <div class="edu-degree">MS in Information Management</div>
           <div class="edu-school">University of Illinois Urbana-Champaign</div>
           <div class="edu-dates">Aug 2025 – May 2027 · Champaign, IL</div>
-          <p class="edu-notes">Coursework: Database Management Systems, Data Warehousing & Power BI, Information Consulting, Data Visualization. Eligible for Spring–Fall 2026 internship.</p>
+          <p class="edu-notes">Coursework: Database Management Systems, Data Warehousing &amp; Power BI, Information Consulting, Data Visualization, Information Organization &amp; Access. Open to SWE / AI / FDE internships now, and full-time roles starting May 2027.</p>
         </div>
         <div class="edu-cell reveal">
           <div class="edu-badge">Undergraduate</div>
-          <div class="edu-degree">Bachelor of Engineering — Computer Science</div>
+          <div class="edu-degree">Bachelor of Engineering, Computer Science</div>
           <div class="edu-school">Savitribai Phule Pune University</div>
           <div class="edu-dates">Aug 2017 – Jun 2021</div>
           <p class="edu-notes">Ranked top 10% nationally in Hack With Infy Hackathon hosted by Infosys. Strong foundation in distributed systems, algorithms, and software engineering.</p>
@@ -1065,7 +1162,7 @@
   <section id="certifications">
     <div class="container">
       <div class="section-eyebrow">Certifications</div>
-      <h2 class="section-title reveal">Licenses &amp; credentials</h2>
+      <h2 class="section-title reveal">Certifications &amp; training</h2>
       <div class="cert-rows reveal">
         <!-- EDIT: certifications — no badges, just clean rows -->
         <div class="cert-row">
@@ -1089,7 +1186,7 @@
     <div class="container">
       <!-- EDIT: contact heading -->
       <h2 class="contact-heading reveal">Let's build something<br /><em>remarkable.</em></h2>
-      <p class="contact-sub reveal">Champaign, IL · Open to relocate · Available Spring-Fall 2026</p>
+      <p class="contact-sub reveal">Champaign, IL · Open to relocate · Internships now, full-time from May 2027</p>
       <div class="contact-grid reveal">
         <!-- EDIT: contact links -->
         <a href="mailto:omkarrchougule19@gmail.com" class="contact-card">
@@ -1114,11 +1211,64 @@
 
   <!-- ═══ FOOTER ════════════════════════════════════ -->
   <!-- EDIT: footer -->
-  <footer>© 2025 Omkar Kumar Chougule · Champaign, IL</footer>
+  <footer>© 2026 Omkar Kumar Chougule · Champaign, IL</footer>
 
   <!-- ═══ JS ════════════════════════════════════════ -->
   <script>
     feather.replace();
+
+    // Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      progressBar.style.width = scrolled + '%';
+    }, { passive: true });
+
+    // Cursor-tracked spotlight glow on grid cells
+    document.querySelectorAll('.skill-cell, .project-cell, .stat-cell').forEach(cell => {
+      cell.addEventListener('mousemove', (e) => {
+        const rect = cell.getBoundingClientRect();
+        cell.style.setProperty('--spot-x', (e.clientX - rect.left) + 'px');
+        cell.style.setProperty('--spot-y', (e.clientY - rect.top) + 'px');
+      });
+    });
+
+    // Subtle 3D tilt on hero photo
+    const photoFrame = document.querySelector('.photo-frame');
+    if (photoFrame) {
+      photoFrame.addEventListener('mousemove', (e) => {
+        const rect = photoFrame.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        photoFrame.style.transform = `rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+      });
+      photoFrame.addEventListener('mouseleave', () => {
+        photoFrame.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
+    // Count-up animation for stats, triggered on scroll into view
+    const countEls = document.querySelectorAll('.stat-val[data-count]');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1100;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    countEls.forEach(el => countObs.observe(el));
 
     // Hamburger
     const ham = document.getElementById('hamburger');
