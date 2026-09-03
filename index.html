@@ -58,7 +58,9 @@ a{color:inherit;}
   background-image:linear-gradient(var(--accent),var(--accent)); background-repeat:no-repeat; background-position:0 100%; background-size:0% 1.5px;
   transition:background-size .25s ease, color .25s ease; }
 .masthead nav a:hover{ color:var(--ink); background-size:100% 1.5px; }
-.masthead .sub{ font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); width:100%; border-top:1px solid var(--line); margin-top:.7rem; padding-top:.6rem; display:flex; justify-content:space-between; }
+.masthead .status{ font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--soft); display:flex; align-items:center; gap:.5rem; }
+.masthead .status .dot{ width:7px; height:7px; border-radius:50%; background:#3a7a45; display:inline-block; box-shadow:0 0 0 0 rgba(58,122,69,.5); animation:pulse-dot 2s infinite; }
+@keyframes pulse-dot{ 0%{box-shadow:0 0 0 0 rgba(58,122,69,.45);} 70%{box-shadow:0 0 0 6px rgba(58,122,69,0);} 100%{box-shadow:0 0 0 0 rgba(58,122,69,0);} }
 
 /* ---------- HERO ---------- */
 .hero{ padding:3.6rem 0 3rem; border-bottom:1px solid var(--line); }
@@ -89,17 +91,13 @@ a{color:inherit;}
 .hero-side .k{ font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:.9rem; }
 .stat-row{ display:flex; justify-content:space-between; padding:.75rem 0; border-bottom:1px dotted var(--line); font-family:var(--mono); font-size:.82rem; }
 .stat-row .v{ color:var(--accent); font-weight:600; font-variant-numeric:tabular-nums; }
-.readout{ margin-top:1.2rem; font-family:var(--mono); font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); display:flex; justify-content:space-between; align-items:center; }
-.readout .fill{ width:70px; height:3px; background:var(--line); position:relative; overflow:hidden; margin-left:.6rem; }
-.readout .fill i{ position:absolute; inset:0; width:0%; background:var(--accent); transition:width .3s ease; }
-
 /* ---------- SECTION SCAFFOLDING ---------- */
 section{ padding:3.6rem 0; border-bottom:1px solid var(--line); }
 section:last-of-type{ border-bottom:none; }
-.section-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2.2rem; flex-wrap:wrap; gap:.6rem; }
-.section-head .eyebrow{ font-family:var(--mono); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); }
-.section-head h2{ font-family:var(--serif); font-weight:500; font-size:clamp(1.5rem,2.6vw,2rem); margin:.3rem 0 0; letter-spacing:-0.01em; }
-.section-head .issue{ font-family:var(--mono); font-size:.68rem; color:var(--faint); text-transform:uppercase; letter-spacing:.08em; }
+.section-head{ margin-bottom:2.2rem; }
+.section-head .eyebrow{ font-family:var(--mono); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--accent); margin-bottom:.4rem; }
+.section-head h2{ font-family:var(--serif); font-weight:500; font-size:clamp(1.6rem,2.8vw,2.1rem); margin:0; letter-spacing:-0.01em; }
+.section-head p{ font-size:.92rem; color:var(--soft); margin:.5rem 0 0; max-width:52ch; }
 
 /* ---------- EXPERIENCE (pinned stories) ---------- */
 .story{ border-top:1px solid var(--line); padding:1.5rem 0; cursor:pointer; }
@@ -182,7 +180,7 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
 
 <div class="masthead">
   <div class="wrap">
-    <div class="brand">The Chougule Report</div>
+    <div class="brand">Omkar Chougule</div>
     <nav>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
@@ -190,19 +188,19 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
-    <div class="sub"><span>Vol. 01 &middot; Champaign, IL</span><span id="clock">Open to work</span></div>
+    <div class="status"><span class="dot"></span>Open to work</div>
   </div>
 </div>
 
 <div class="wrap">
   <section class="hero" id="top">
-    <div class="hero-kicker">Profile &middot; Backend / Systems Engineer</div>
+    <div class="hero-kicker">Backend / Systems Engineer</div>
     <div class="hero-grid">
       <div>
         <h1 id="heroHeadline">From cross&#8209;currency APIs to AI&#8209;native product builds</h1>
-        <p class="lede">Four years at Infosys taught Omkar Chougule to ship distributed systems under pressure. Now, as an MSIM candidate at the University of Illinois iSchool, he uses Claude, Gemini, and LangChain as daily tools&mdash;not buzzwords&mdash;to build full products solo, from a self-querying course agent to a supply-chain simulation used in an actual classroom.</p>
+        <p class="lede">Four years at Infosys taught me to ship distributed systems under pressure. Now, as an MSIM candidate at the University of Illinois iSchool, I use Claude, Gemini, and LangChain as daily tools&mdash;not buzzwords&mdash;to build full products solo, from a self-querying course agent to a supply-chain simulation used in an actual classroom.</p>
         <div class="hero-cta">
-          <a class="btn primary" href="mailto:okc2@illinois.edu">Email Omkar</a>
+          <a class="btn primary" href="mailto:okc2@illinois.edu">Email me</a>
           <a class="btn" href="https://linkedin.com/in/omkarchougule23" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/omkarchougule19" target="_blank" rel="noopener">GitHub</a>
         </div>
@@ -213,18 +211,14 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
         <div class="stat-row"><span>REST APIs shipped</span><span class="v">17+</span></div>
         <div class="stat-row"><span>UIUC initiatives led end&#8209;to&#8209;end</span><span class="v">2</span></div>
         <div class="stat-row"><span>Location</span><span class="v">Champaign, IL</span></div>
-        <div class="readout"><span id="readoutLabel">Reading&hellip; 0%</span><span class="fill"><i id="heroFill"></i></span></div>
       </div>
     </div>
   </section>
 
   <section id="experience">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">Career</div>
-        <h2>Experience</h2>
-      </div>
-      <div class="issue">Click a role to read the full story</div>
+      <h2>Experience</h2>
+      <p>Click a role to read the details.</p>
     </div>
 
     <div class="story open" data-story>
@@ -313,11 +307,8 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
 
   <section id="projects">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">Case Studies</div>
-        <h2>Projects</h2>
-      </div>
-      <div class="issue">Selected work, 2020&ndash;2026</div>
+      <h2>Projects</h2>
+      <p>A selection of things I've built, independently and in teams.</p>
     </div>
     <div class="proj-grid">
       <div class="proj-card">
@@ -365,10 +356,7 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
 
   <section id="skills">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">Toolbox</div>
-        <h2>Skills</h2>
-      </div>
+      <h2>Skills</h2>
     </div>
     <div class="skills-grid">
       <div class="skill-col">
@@ -400,10 +388,7 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
 
   <section id="education">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">Academics</div>
-        <h2>Education &amp; Certifications</h2>
-      </div>
+      <h2>Education &amp; Certifications</h2>
     </div>
     <div class="edu-grid">
       <div>
@@ -431,7 +416,7 @@ footer{ text-align:center; padding:1.6rem 0 2.4rem; font-family:var(--mono); fon
   </section>
 
   <section class="contact" id="contact" style="border-bottom:none;">
-    <h2>Let's talk.</h2>
+    <h2>Get in touch</h2>
     <div class="links">
       <a href="mailto:okc2@illinois.edu">okc2@illinois.edu</a>
       <a href="tel:+12174021588">(217) 402-1588</a>
@@ -459,18 +444,6 @@ if(headline){
   });
   headline.addEventListener('mouseleave', () => words.forEach(w => w.classList.remove('lit')));
 }
-
-/* Ambient reading readout in hero */
-const heroFill = document.getElementById('heroFill');
-const readoutLabel = document.getElementById('readoutLabel');
-let p = 0, dir = 1;
-(function tick(){
-  p += dir * 0.35;
-  if(p > 72 || p < 0) dir *= -1;
-  if(heroFill) heroFill.style.width = Math.max(0,p) + '%';
-  if(readoutLabel) readoutLabel.textContent = 'Reading… ' + Math.max(0,Math.round(p)) + '%';
-  requestAnimationFrame(tick);
-})();
 
 /* Experience: click to open one story at a time */
 const stories = document.querySelectorAll('[data-story]');
