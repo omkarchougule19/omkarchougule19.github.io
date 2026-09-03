@@ -4,414 +4,481 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Omkar Chougule — Portfolio</title>
-<meta name="description" content="Omkar Chougule — backend/systems engineer with AI-native build fluency, MSIM candidate at the UIUC iSchool.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#0a0a0d;
-  --bg-2:#0f0f13;
-  --card:#131318;
-  --card-line:#232329;
-  --ink:#f2f2f0;
-  --soft:#a3a2ad;
-  --faint:#65646f;
-  --accent:#7c6cff;
-  --accent-2:#4fd1c5;
-  --accent-warm:#ff7a5c;
-  --display:'Space Grotesk', 'Inter', system-ui, sans-serif;
-  --body:'Inter', system-ui, sans-serif;
-  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --bg:#fbfbfa; --bg-raised:#ffffff; --ink:#121210; --soft:#57564f; --faint:#8c8b83; --line:#e4e1d6;
+  --accent:#8a6b3e; --accent-2:#2f6f5e; --accent-soft:#f2ead9;
+  --display:'Fraunces',serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
-*,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--body); line-height:1.6; -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-img{ max-width:100%; }
-a{ color:inherit; }
-::selection{ background:rgba(124,108,255,.35); }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.45;
+  background-image:radial-gradient(circle at 1px 1px, rgba(0,0,0,.035) 1px, transparent 0);background-size:26px 26px}
+::selection{background:var(--accent-soft);color:var(--ink)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:dotpulse 2.2s ease-in-out infinite}
+@keyframes dotpulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.section-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--faint);margin:0 0 28px}
 
-/* ---------- AMBIENT BACKGROUND ---------- */
-.aurora{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
-.aurora .blob{ position:absolute; border-radius:50%; filter:blur(90px); opacity:.5; }
-.aurora .b1{ width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, var(--accent), transparent 70%); animation:float1 22s ease-in-out infinite; }
-.aurora .b2{ width:560px; height:560px; top:20%; right:-200px; background:radial-gradient(circle, var(--accent-2), transparent 70%); opacity:.32; animation:float2 26s ease-in-out infinite; }
-.aurora .b3{ width:480px; height:480px; bottom:-220px; left:20%; background:radial-gradient(circle, var(--accent-warm), transparent 70%); opacity:.22; animation:float3 30s ease-in-out infinite; }
-.grain{ position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-@keyframes float1{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(60px,40px); } }
-@keyframes float2{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-50px,60px); } }
-@keyframes float3{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(40px,-50px); } }
+/* NAV */
+nav{position:sticky;top:0;z-index:40;background:rgba(251,251,250,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.navrow{max-width:1080px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:-.01em}
+.navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:12px;color:var(--soft)}
+.navlinks a{text-decoration:none;position:relative}
+.navlinks a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .2s}
+.navlinks a:hover::after{transform:scaleX(1)}
+.pill{font-family:var(--mono);font-size:11px;background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:999px;display:flex;align-items:center;gap:6px}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);animation:dotpulse 2s infinite}
 
-.content{ position:relative; z-index:2; }
-.wrap{ max-width:1120px; margin:0 auto; padding:0 2rem; }
+/* HERO */
+.hero{position:relative;padding:100px 0 60px;overflow:hidden}
+#neuralCanvas{position:absolute;top:-40px;left:0;width:100%;height:640px;z-index:0}
+.hero-inner{position:relative;z-index:2}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,5.6vw,68px);line-height:1.05;letter-spacing:-.01em;
+  margin:0 0 24px;max-width:820px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .lede{font-size:17px;line-height:1.7;color:var(--soft);max-width:560px;margin:0 0 36px}
+.hero-cta{display:flex;gap:14px;align-items:center;margin-bottom:56px;flex-wrap:wrap}
+.tool-badge{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;border:1px solid var(--line);
+  background:var(--bg-raised);border-radius:999px;padding:10px 16px 10px 14px;color:var(--soft);transition:border-color .2s}
+.tool-badge:hover{border-color:var(--accent)}
+.tool-badge .prompt{color:var(--faint)}
+.tool-badge #typeLine{color:var(--accent);min-width:98px;display:inline-block}
+.btn{font-family:var(--mono);font-size:12.5px;padding:13px 22px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:22px 24px;border-right:1px solid var(--line);transition:background-color .2s}
+.stats div:hover{background-color:var(--accent-soft)}
+.stats div:last-child{border-right:none}
+.stats .num{font-family:var(--display);font-size:32px;font-weight:500}
+.stats .lbl{font-family:var(--mono);font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 
-/* ---------- NAV ---------- */
-.nav{ position:sticky; top:0; z-index:50; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); background:rgba(10,10,13,.7); border-bottom:1px solid var(--card-line); }
-.nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding:1.1rem 2rem; }
-.brand{ display:flex; align-items:center; gap:.6rem; font-family:var(--display); font-weight:700; font-size:1.05rem; letter-spacing:-0.01em; text-decoration:none; }
-.brand .mark{ width:30px; height:30px; border-radius:9px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; font-size:.85rem; color:#0a0a0d; }
-.nav nav{ display:flex; gap:2rem; }
-.nav nav a{ font-size:.88rem; color:var(--soft); text-decoration:none; transition:color .2s ease; }
-.nav nav a:hover{ color:var(--ink); }
-.nav .cta{ display:flex; align-items:center; gap:1rem; }
-.pill{ display:inline-flex; align-items:center; gap:.5rem; font-family:var(--mono); font-size:.7rem; letter-spacing:.03em; color:var(--soft); border:1px solid var(--card-line); padding:.4rem .8rem; border-radius:99px; }
-.pill .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 0 0 rgba(79,209,197,.5); animation:pulse 2s infinite; }
-@keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(79,209,197,.45);} 70%{box-shadow:0 0 0 7px rgba(79,209,197,0);} 100%{box-shadow:0 0 0 0 rgba(79,209,197,0);} }
+/* SPOTLIGHT CARD (cursor-reactive) */
+.spot{position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), rgba(138,107,62,.14), transparent 60%)}
+.spot:hover::before{opacity:1}
 
-/* ---------- BUTTONS ---------- */
-.btn{ font-family:var(--body); font-weight:600; font-size:.9rem; padding:.75rem 1.4rem; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; transition:transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; border:1px solid transparent; }
-.btn-primary{ background:linear-gradient(135deg, var(--accent), #6355e0); color:#fff; box-shadow:0 8px 24px -8px rgba(124,108,255,.6); }
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(124,108,255,.75); }
-.btn-ghost{ background:rgba(255,255,255,.03); border-color:var(--card-line); color:var(--ink); }
-.btn-ghost:hover{ border-color:#3a3a44; background:rgba(255,255,255,.06); transform:translateY(-2px); }
+/* EXPERIENCE */
+section{position:relative;z-index:2;padding:80px 0}
+.role{border-top:1px solid var(--line);padding:0}
+.role:last-child{border-bottom:1px solid var(--line)}
+.role-head{display:grid;grid-template-columns:150px 1fr auto;gap:24px;align-items:baseline;padding:26px 0 26px 16px;margin-left:-16px;cursor:pointer;
+  border-radius:6px;transition:background-color .2s}
+.role-head:hover{background-color:var(--accent-soft)}
+.role-head .when{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap}
+.role-head h3{margin:0 0 4px;font-size:18px;font-weight:600}
+.role-head .org{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+.role-head .chev{font-size:14px;color:var(--faint);transition:transform .25s}
+.role.open .chev{transform:rotate(45deg)}
+.role-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.role.open .role-body{max-height:640px}
+.role-body-in{padding:0 0 30px 174px}
+.role-body-in li{font-size:14px;line-height:1.7;color:var(--soft);margin-bottom:8px}
+.role-links{margin-top:10px;display:flex;gap:16px;font-family:var(--mono);font-size:11.5px}
+.role-links a{color:var(--accent);text-decoration:none}
 
-/* ---------- HERO ---------- */
-.hero{ padding:6rem 0 5rem; text-align:center; }
-.hero .eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-family:var(--mono); font-size:.75rem; letter-spacing:.04em; color:var(--soft); border:1px solid var(--card-line); background:rgba(255,255,255,.03); padding:.45rem .9rem; border-radius:99px; margin-bottom:2rem; }
-.hero .eyebrow b{ color:var(--accent-2); font-weight:600; }
-.hero h1{ font-family:var(--display); font-weight:700; font-size:clamp(2.6rem,6.5vw,4.6rem); line-height:1.04; letter-spacing:-0.02em; margin:0 auto 1.5rem; max-width:16ch; text-wrap:balance; }
-.hero h1 .grad{ background:linear-gradient(120deg, var(--accent) 10%, var(--accent-2) 60%, var(--accent-warm) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.hero .lede{ font-size:1.15rem; color:var(--soft); max-width:56ch; margin:0 auto 2.5rem; line-height:1.7; }
-.hero .actions{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-bottom:1.6rem; }
-.hero .links{ display:flex; justify-content:center; gap:1.6rem; font-family:var(--mono); font-size:.8rem; }
-.hero .links a{ color:var(--faint); text-decoration:none; transition:color .2s ease; }
-.hero .links a:hover{ color:var(--accent-2); }
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj-card{background:var(--bg-raised);border:1px solid var(--line);border-radius:4px;padding:24px;transition:border-color .2s, transform .2s}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.proj-tag{font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.proj-card h4{margin:0 0 8px;font-size:16px}
+.proj-card p{font-size:13px;line-height:1.6;color:var(--soft);margin:0 0 14px}
+.proj-links{display:flex;gap:14px;font-family:var(--mono);font-size:11px}
+.proj-links a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.proj-links a:hover{color:var(--accent);border-color:var(--accent)}
 
-/* ---------- STATS ---------- */
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--card-line); border:1px solid var(--card-line); border-radius:16px; overflow:hidden; margin:0 auto 6rem; max-width:1000px; }
-.stat{ background:var(--card); padding:1.8rem 1.4rem; text-align:center; }
-.stat .v{ font-family:var(--display); font-weight:700; font-size:1.9rem; background:linear-gradient(135deg, var(--ink), var(--soft)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.stat .l{ font-size:.78rem; color:var(--faint); margin-top:.4rem; }
+/* SKILLS - as connected chips */
+.skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.skill-grp .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;color:var(--faint);letter-spacing:.06em;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:11.5px;background:var(--bg-raised);border:1px solid var(--line);padding:6px 11px;border-radius:6px;
+  transition:border-color .2s, color .2s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ---------- SECTION SCAFFOLD ---------- */
-section{ padding:5rem 0; }
-.section-head{ margin-bottom:2.6rem; }
-.section-head .eyebrow{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-2); margin-bottom:.6rem; }
-.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(1.7rem,3vw,2.2rem); margin:0; letter-spacing:-0.01em; }
-.section-head p{ color:var(--soft); font-size:.95rem; margin:.6rem 0 0; max-width:56ch; }
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.edu-card{background:var(--bg-raised);border:1px solid var(--line);border-radius:4px;padding:26px;position:relative;overflow:hidden}
+.edu-card .when{font-family:var(--mono);font-size:11px;color:var(--faint);margin-bottom:8px}
+.edu-card h4{margin:0 0 4px;font-size:16px}
+.edu-card .org{color:var(--soft);font-size:13px;margin-bottom:10px}
+.edu-card p{font-size:12.5px;line-height:1.6;color:var(--soft)}
 
-/* ---------- EXPERIENCE ---------- */
-.timeline{ position:relative; padding-left:2rem; }
-.timeline::before{ content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:linear-gradient(var(--accent), var(--card-line) 90%); }
-.tl-item{ position:relative; padding-bottom:2.2rem; cursor:pointer; }
-.tl-item:last-child{ padding-bottom:0; }
-.tl-item::before{ content:''; position:absolute; left:-2rem; top:6px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); transition:background .2s, box-shadow .2s; }
-.tl-item:hover::before, .tl-item.open::before{ background:var(--accent); box-shadow:0 0 0 4px rgba(124,108,255,.2); }
-.tl-head{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; }
-.tl-head h3{ font-family:var(--display); font-weight:600; font-size:1.15rem; margin:0; transition:color .2s ease; }
-.tl-item:hover .tl-head h3, .tl-item.open .tl-head h3{ color:var(--accent-2); }
-.tl-head .meta{ font-family:var(--mono); font-size:.75rem; color:var(--faint); white-space:nowrap; }
-.tl-org{ font-size:.85rem; color:var(--soft); margin-top:.25rem; }
-.tl-body{ max-height:0; opacity:0; overflow:hidden; transition:max-height .4s cubic-bezier(.2,.7,.2,1), opacity .3s ease, margin .4s ease; }
-.tl-item.open .tl-body{ max-height:420px; opacity:1; margin-top:1rem; }
-.tl-body ul{ margin:0; padding-left:1.1rem; font-size:.88rem; color:var(--soft); }
-.tl-body li{ margin-bottom:.5rem; }
-.tl-body .links{ margin-top:.6rem; display:flex; gap:1rem; font-family:var(--mono); font-size:.75rem; }
-.tl-body .links a{ color:var(--accent-2); text-decoration:none; }
+#typeLine{font-family:var(--mono);font-size:13px;color:var(--accent)}
+#typeLine .cursor{display:inline-block;width:7px;height:14px;background:var(--accent);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:-2px}
+@keyframes blink{50%{opacity:0}}
 
-/* ---------- PROJECTS ---------- */
-.proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem; }
-.proj-card{ position:relative; background:var(--card); border:1px solid var(--card-line); border-radius:16px; padding:1.7rem; overflow:hidden; transition:transform .2s ease, border-color .2s ease; }
-.proj-card:hover{ transform:translateY(-3px); border-color:#3a3a4a; }
-.proj-card::before{ content:''; position:absolute; inset:0; opacity:0; transition:opacity .3s ease;
-  background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%), rgba(124,108,255,.14), transparent 60%); }
-.proj-card:hover::before{ opacity:1; }
-.proj-card .n{ font-family:var(--mono); font-size:.72rem; color:var(--faint); }
-.proj-card h3{ font-family:var(--display); font-weight:600; font-size:1.15rem; margin:.5rem 0 .6rem; position:relative; }
-.proj-card p{ font-size:.87rem; color:var(--soft); line-height:1.65; margin:0 0 1rem; position:relative; }
-.proj-card .tags{ display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; position:relative; }
-.proj-card .tag{ font-family:var(--mono); font-size:.65rem; color:var(--accent-2); border:1px solid rgba(79,209,197,.25); background:rgba(79,209,197,.06); padding:.2rem .55rem; border-radius:20px; }
-.proj-card .links{ display:flex; gap:1.2rem; font-family:var(--mono); font-size:.75rem; position:relative; }
-.proj-card .links a{ color:var(--ink); text-decoration:none; opacity:.75; transition:opacity .2s, color .2s; }
-.proj-card .links a:hover{ opacity:1; color:var(--accent-2); }
+/* CONTACT */
+.contact-card{background:var(--ink);color:#f2f1ec;border-radius:6px;padding:56px;text-align:center;position:relative;overflow:hidden}
+#tokenCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
 
-/* ---------- SKILLS ---------- */
-.skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-.skill-card{ background:var(--card); border:1px solid var(--card-line); border-radius:14px; padding:1.4rem; }
-.skill-card .k{ font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-2); margin-bottom:.8rem; }
-.skill-card .tags{ display:flex; flex-wrap:wrap; gap:.45rem; }
-.skill-card .tag{ font-size:.8rem; color:var(--soft); background:rgba(255,255,255,.04); border:1px solid var(--card-line); padding:.3rem .65rem; border-radius:8px; }
+/* IMPACT BAND — bold moment */
+.impact-band{background:var(--ink);color:#f2f1ec;margin:90px 0;padding:90px 32px;text-align:center;overflow:hidden}
+.impact-band .stmt{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(24px,4.4vw,46px);line-height:1.25;
+  max-width:900px;margin:0 auto;opacity:.18;transition:opacity .6s ease}
+.impact-band .stmt.lit{opacity:1}
+.impact-band .stmt .hi{color:var(--accent-soft)}
 
-/* ---------- EDUCATION ---------- */
-.edu-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:1.2rem; }
-.edu-card{ background:var(--card); border:1px solid var(--card-line); border-radius:14px; padding:1.6rem; }
-.edu-card .deg{ font-family:var(--display); font-weight:600; font-size:1.1rem; margin-bottom:.3rem; }
-.edu-card .school{ font-size:.88rem; color:var(--soft); }
-.edu-card .dates{ font-family:var(--mono); font-size:.7rem; color:var(--faint); margin-top:.3rem; }
-.edu-card .course{ font-size:.8rem; color:var(--faint); margin-top:.7rem; line-height:1.6; }
-.edu-card + .edu-card{ margin-top:1.2rem; }
-.cert-list{ list-style:none; margin:0; padding:0; }
-.cert-list li{ padding:.75rem 0; border-bottom:1px solid var(--card-line); font-size:.85rem; display:flex; justify-content:space-between; }
-.cert-list li:first-child{ padding-top:0; }
-.cert-list li:last-child{ border-bottom:none; }
-.cert-list .yr{ font-family:var(--mono); font-size:.7rem; color:var(--faint); }
+/* skills node backdrop */
+.skills-net{position:relative}
+#skillsCanvas{position:absolute;inset:-20px 0 0 0;width:100%;height:calc(100% + 20px);z-index:0;pointer-events:none}
+.skill-groups{position:relative;z-index:1}
+.contact-card h2{font-family:var(--display);font-weight:600;font-style:normal;font-size:clamp(26px,4vw,38px);margin:0 0 14px}
+.contact-card p{color:#c8c6bc;font-size:14.5px;margin:0 0 28px;position:relative;z-index:1}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;position:relative;z-index:1}
+.contact-links a{color:#f2f1ec;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px}
+.contact-links a:hover{border-color:var(--accent-soft);color:var(--accent-soft)}
+footer{padding:40px 0;text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint)}
 
-/* ---------- CONTACT ---------- */
-.contact-card{ position:relative; background:linear-gradient(160deg, rgba(124,108,255,.12), rgba(79,209,197,.06)); border:1px solid var(--card-line); border-radius:24px; padding:3.6rem 2rem; text-align:center; overflow:hidden; }
-.contact-card h2{ font-family:var(--display); font-weight:700; font-size:clamp(1.8rem,3.6vw,2.6rem); margin:0 0 1rem; letter-spacing:-0.01em; }
-.contact-card p{ color:var(--soft); max-width:48ch; margin:0 auto 2rem; }
-.contact-links{ display:flex; justify-content:center; gap:1.4rem; flex-wrap:wrap; font-family:var(--mono); font-size:.82rem; margin-top:2rem; }
-.contact-links a{ color:var(--soft); text-decoration:none; transition:color .2s ease; }
-.contact-links a:hover{ color:var(--accent-2); }
-
-footer{ text-align:center; padding:2.4rem 0 3rem; font-family:var(--mono); font-size:.72rem; color:var(--faint); }
-
-@media (max-width:900px){
-  .stats{ grid-template-columns:repeat(2,1fr); }
-  .proj-grid{ grid-template-columns:1fr; }
-  .skills-grid{ grid-template-columns:1fr 1fr; }
-  .edu-grid{ grid-template-columns:1fr; }
-}
-@media (max-width:640px){
-  .nav nav{ display:none; }
-  .skills-grid{ grid-template-columns:1fr; }
-  .stats{ grid-template-columns:1fr 1fr; }
+@media(max-width:760px){
+  .wrap{padding:0 20px}
+  .navrow{padding:14px 20px}
+  .logo{font-size:15px}
+  .pill{font-size:10px;padding:5px 10px}
+  .hero{padding:60px 0 40px}
+  #neuralCanvas{height:420px}
+  .hero .lede{font-size:15px}
+  .hero-cta{margin-bottom:40px}
+  .tool-badge{font-size:11px;padding:8px 12px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stats div{padding:16px}
+  .stats .num{font-size:24px}
+  section{padding:56px 0}
+  .impact-band{padding:56px 20px;margin:56px 0}
+  .proj-grid,.skill-groups,.edu-grid{grid-template-columns:1fr}
+  .role-head{grid-template-columns:1fr;gap:6px;padding:20px 12px;margin-left:-12px}
+  .role-head .chev{position:absolute;right:0;top:20px}
+  .role-head{position:relative}
+  .role-body-in{padding-left:0}
+  .navlinks{display:none}
+  .contact-card{padding:36px 22px}
+  .contact-links{gap:12px;font-size:11.5px}
 }
 </style>
 </head>
 <body>
-
-<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="grain"></div>
 
-<div class="content">
-  <div class="nav">
-    <div class="wrap">
-      <a href="#top" class="brand"><span class="mark">OC</span>Omkar Chougule</a>
-      <nav>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-      </nav>
-      <div class="cta">
-        <span class="pill"><span class="dot"></span>Open to work</span>
-      </div>
+<nav>
+  <div class="navrow">
+    <div class="logo">Omkar Chougule</div>
+    <div class="navlinks">
+      <a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#education">Education</a>
     </div>
+    <div class="pill"><span class="dot"></span>Open to work</div>
   </div>
+</nav>
 
-  <div class="wrap">
-    <section class="hero" id="top">
-      <div class="eyebrow">⚡ <b>4+ yrs</b> shipping distributed systems &middot; now building AI-native</div>
-      <h1>Backend engineer for the <span class="grad">AI-accelerated</span> era</h1>
-      <p class="lede">I spent four years shipping distributed systems at Infosys. Now, as an MSIM candidate at the University of Illinois iSchool, I build full products solo&mdash;using Claude, Gemini, and LangChain as daily tools, not buzzwords.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:okc2@illinois.edu">Get in touch</a>
-        <a class="btn btn-ghost" href="#projects">View projects</a>
-      </div>
-      <div class="links">
-        <a href="https://linkedin.com/in/omkarchougule23" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/omkarchougule19" target="_blank" rel="noopener">GitHub</a>
-        <a href="tel:+12174021588">(217) 402-1588</a>
-      </div>
-    </section>
-
+<div class="hero">
+  <canvas id="neuralCanvas"></canvas>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Backend Engineering · Applied AI</div>
+    <h1>Four years shipping distributed systems.<br>Now I'm building the <em>AI-native</em> layer on top.</h1>
+    <p class="lede">I'm an MSIM candidate at the University of Illinois iSchool. I ship full products solo, using Claude, Gemini, and LangChain as daily tools, not buzzwords.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="btn btn-ghost" href="#projects">View projects</a>
+      <div class="tool-badge"><span class="prompt">$ currently running</span><span id="typeLine"></span></div>
+    </div>
     <div class="stats">
-      <div class="stat"><div class="v">4+</div><div class="l">Years Experience</div></div>
-      <div class="stat"><div class="v">17+</div><div class="l">REST APIs Shipped</div></div>
-      <div class="stat"><div class="v">6</div><div class="l">Independent Projects</div></div>
-      <div class="stat"><div class="v">2</div><div class="l">UIUC Initiatives Led</div></div>
+      <div><div class="num">4+</div><div class="lbl">Years Experience</div></div>
+      <div><div class="num">17+</div><div class="lbl">REST APIs Shipped</div></div>
+      <div><div class="num">6</div><div class="lbl">Independent Projects</div></div>
+      <div><div class="num">95%</div><div class="lbl">Sprint Velocity, Infosys</div></div>
     </div>
-
-    <section id="experience">
-      <div class="section-head">
-        <div class="eyebrow">Career</div>
-        <h2>Experience</h2>
-        <p>Four years in industry, now building at the intersection of systems engineering and AI tooling.</p>
-      </div>
-      <div class="timeline">
-        <div class="tl-item open" data-tl>
-          <div class="tl-head"><h3>Data Governance &amp; AI Intern</h3><span class="meta">May 2026 &ndash; Present</span></div>
-          <div class="tl-org">University of Illinois Foundation &middot; Champaign, IL</div>
-          <div class="tl-body">
-            <ul>
-              <li>Maintain, standardize, and validate donor and constituent records in the Foundation's live CRM using SQL and Excel, touching 200+ records per day.</li>
-              <li>Apply data governance standards across the CRM to improve consistency, completeness, and reliability of donor data.</li>
-              <li>Contributed to an AI-assisted data governance proof of concept exploring automated validation workflows.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tl-item" data-tl>
-          <div class="tl-head"><h3>Research Assistant &mdash; Product Design &amp; AI Integration</h3><span class="meta">Apr &ndash; Aug 2026</span></div>
-          <div class="tl-org">Gies College of Business, UIUC &middot; Hybrid</div>
-          <div class="tl-body">
-            <ul>
-              <li>Independently designed and built <strong>Supply Rush</strong>, a full-stack supply-chain simulation used by a professor to teach students, owning the entire lifecycle solo through an AI-accelerated workflow.</li>
-              <li>Modeled truck/drone allocation and capacity planning under randomized market disruptions; built linear-programming benchmarks to evaluate outcomes.</li>
-              <li>Built KPI tracking, 10+ market events, and instructor customization features.</li>
-            </ul>
-            <div class="links"><a href="https://supply-rush.onrender.com/" target="_blank" rel="noopener">Live demo &rarr;</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank" rel="noopener">Source &rarr;</a></div>
-          </div>
-        </div>
-        <div class="tl-item" data-tl>
-          <div class="tl-head"><h3>Product &amp; Technology Lead</h3><span class="meta">Jan &ndash; May 2026</span></div>
-          <div class="tl-org">Business Intelligence Group (BIG), UIUC &middot; Champaign, IL</div>
-          <div class="tl-body">
-            <ul>
-              <li>Led a 6-person cross-functional team to deliver a full-stack proof of concept for a multi-university organization managing employment for people in rehabilitation.</li>
-              <li>Contributed hands-on across the stack (React + Java), deployed the POC on AWS EC2, connected the database to Tableau for reporting.</li>
-              <li>Defined a phased delivery roadmap &mdash; 95% milestone completion rate &mdash; and built Python ETL pipelines and Power BI dashboards.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tl-item" data-tl>
-          <div class="tl-head"><h3>Software Development Engineer</h3><span class="meta">Aug 2021 &ndash; Aug 2025</span></div>
-          <div class="tl-org">Infosys &middot; Pune, India &middot; 4 yr 1 mo</div>
-          <div class="tl-body">
-            <ul>
-              <li>Engineered 17+ REST APIs (Java, Spring Boot) in a distributed microservices architecture for banking workflows, with CI/CD via OpenShift, Docker, Jenkins.</li>
-              <li>Introduced Kafka-based async processing &mdash; cut response times ~30% in performance testing.</li>
-              <li>Cut defect/incident rate ~40% in staging via independently written test coverage; led a 6-engineer team across 8 sprints at 95% velocity.</li>
-              <li>Solely authored API specs and onboarding docs, cutting new-engineer ramp-up ~40%. Recipient of the Infosys Insta Award.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tl-item" data-tl>
-          <div class="tl-head"><h3>Head of Programme Management</h3><span class="meta">Jul 2019 &ndash; Jul 2020</span></div>
-          <div class="tl-org">IEEE Student Branch &middot; Pune, India</div>
-          <div class="tl-body">
-            <ul>
-              <li>Planned and executed 15+ workshops/events for a 200-member organization, averaging 50+ attendees.</li>
-              <li>Personally set up and troubleshot hardware/A-V for events; managed budgets combining internal funding and sponsorships.</li>
-              <li>Led an inherited 5-person coordinator team using OKRs.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="section-head">
-        <div class="eyebrow">Selected Work</div>
-        <h2>Projects</h2>
-        <p>Things I've built independently and in teams, 2020&ndash;2026.</p>
-      </div>
-      <div class="proj-grid">
-        <div class="proj-card" data-tilt>
-          <div class="n">01</div>
-          <h3>Supply Rush</h3>
-          <p>A full-stack supply-chain simulation, built solo end to end with an AI-accelerated workflow, used by a professor to teach students.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Solo build</span></div>
-          <div class="links"><a href="https://supply-rush.onrender.com/" target="_blank" rel="noopener">Live &rarr;</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank" rel="noopener">Source &rarr;</a></div>
-        </div>
-        <div class="proj-card" data-tilt>
-          <div class="n">02</div>
-          <h3>RAG Chatbot System</h3>
-          <p>A modular, 13-module retrieval-augmented pipeline with multi-query retrieval, reciprocal rank fusion, and cross-encoder reranking.</p>
-          <div class="tags"><span class="tag">LangChain</span><span class="tag">ChromaDB</span><span class="tag">OpenAI API</span></div>
-          <div class="links"><a href="https://github.com/omkarchougule19/ragSystem" target="_blank" rel="noopener">Source &rarr;</a></div>
-        </div>
-        <div class="proj-card" data-tilt>
-          <div class="n">03</div>
-          <h3>UIUC Course Explorer Data Agent</h3>
-          <p>A concurrent scraper feeding a resumable SQLite pipeline, with a LangChain agent that writes and executes its own SQL to answer plain-English questions.</p>
-          <div class="tags"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">LangChain</span></div>
-          <div class="links"><a href="https://course-explorer-agent.onrender.com/" target="_blank" rel="noopener">Live &rarr;</a><a href="https://github.com/omkarchougule19/course-explorer-agent" target="_blank" rel="noopener">Source &rarr;</a></div>
-        </div>
-        <div class="proj-card" data-tilt>
-          <div class="n">04</div>
-          <h3>EV Market Intelligence Analytics System</h3>
-          <p>ETL pipelines against public EV market datasets feeding a Power BI data mart with star schema and DAX measures &mdash; cut analysis turnaround 40%.</p>
-          <div class="tags"><span class="tag">Python ETL</span><span class="tag">Power BI</span><span class="tag">Team of 3</span></div>
-          <div class="links"><a href="https://github.com/omkarchougule19/EV-Market-Intelligence-Analytics-System" target="_blank" rel="noopener">Source &rarr;</a></div>
-        </div>
-        <div class="proj-card" data-tilt>
-          <div class="n">05</div>
-          <h3>FitSense &amp; StyleFlow</h3>
-          <p>PM for a 5-person consulting team on an AI product strategy for Lululemon &mdash; a privacy-preserving sizing tool and an explainable outfit-recommendation engine.</p>
-          <div class="tags"><span class="tag">Product Strategy</span><span class="tag">UIUC IS534</span></div>
-        </div>
-        <div class="proj-card" data-tilt>
-          <div class="n">06</div>
-          <h3>JusMath</h3>
-          <p>A published native Android aptitude-prep app with 500+ questions and a timed quiz mode &mdash; 300 verified active users via Firebase Analytics.</p>
-          <div class="tags"><span class="tag">Java</span><span class="tag">Android</span><span class="tag">Firebase</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="section-head">
-        <div class="eyebrow">Toolbox</div>
-        <h2>Skills</h2>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-card"><div class="k">Languages</div><div class="tags"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript / TS</span><span class="tag">SQL</span></div></div>
-        <div class="skill-card"><div class="k">Backend &amp; Systems</div><div class="tags"><span class="tag">Spring Boot</span><span class="tag">Microservices</span><span class="tag">FastAPI</span><span class="tag">React</span></div></div>
-        <div class="skill-card"><div class="k">Data &amp; Messaging</div><div class="tags"><span class="tag">Kafka</span><span class="tag">PostgreSQL</span><span class="tag">Power BI</span><span class="tag">Redis</span></div></div>
-        <div class="skill-card"><div class="k">Cloud &amp; DevOps</div><div class="tags"><span class="tag">AWS EC2</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">CI/CD</span></div></div>
-        <div class="skill-card"><div class="k">AI / Agentic Tooling</div><div class="tags"><span class="tag">LangChain</span><span class="tag">Claude Code</span><span class="tag">Gemini</span></div></div>
-        <div class="skill-card"><div class="k">Product &amp; PM</div><div class="tags"><span class="tag">Roadmapping</span><span class="tag">Agile/Scrum</span><span class="tag">PRDs</span></div></div>
-      </div>
-    </section>
-
-    <section id="education">
-      <div class="section-head">
-        <div class="eyebrow">Academics</div>
-        <h2>Education &amp; Certifications</h2>
-      </div>
-      <div class="edu-grid">
-        <div>
-          <div class="edu-card">
-            <div class="deg">M.S. Information Management (MSIM)</div>
-            <div class="school">University of Illinois iSchool, Urbana&ndash;Champaign</div>
-            <div class="dates">Aug 2025 &ndash; May 2027</div>
-            <div class="course">Coursework: Advanced AI Applications, Machine Learning, Database Management Systems, Data Warehousing and Power BI, Data Visualization.</div>
-          </div>
-          <div class="edu-card">
-            <div class="deg">B.E. Computer Science</div>
-            <div class="school">Savitribai Phule Pune University</div>
-            <div class="dates">Aug 2017 &ndash; Jun 2021</div>
-            <div class="course">Hack With Infy Hackathon &mdash; top 10% nationally, out of thousands of submissions.</div>
-          </div>
-        </div>
-        <div class="edu-card">
-          <div class="deg" style="margin-bottom:1rem;">Certifications</div>
-          <ul class="cert-list">
-            <li>Google Project Management Certificate <span class="yr">2022</span></li>
-            <li>MTA: Intro to Programming Using JavaScript <span class="yr">2019</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="contact-card">
-        <h2>Let's build something.</h2>
-        <p>Open to full-time and internship roles in backend engineering, AI/ML, and forward-deployed engineering.</p>
-        <a class="btn btn-primary" href="mailto:okc2@illinois.edu">okc2@illinois.edu</a>
-        <div class="contact-links">
-          <a href="tel:+12174021588">(217) 402-1588</a>
-          <a href="https://linkedin.com/in/omkarchougule23" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/omkarchougule19" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-    </section>
   </div>
-
-  <footer>Omkar Chougule &middot; Champaign, IL &middot; Open to relocate</footer>
 </div>
 
+
+<section id="experience" class="wrap">
+  <div class="section-title">Experience</div>
+
+  <div class="role" data-r="0">
+    <div class="role-head"><span class="when">May 2026 – Present</span>
+      <div><h3>Data Governance & AI Intern</h3><span class="org">University of Illinois Foundation</span></div>
+      <span class="chev">+</span></div>
+    <div class="role-body"><div class="role-body-in">
+      <li>Maintain, standardize, and validate donor and constituent records in the Foundation's live CRM, 200+ records a day.</li>
+      <li>Apply data governance standards across the CRM to improve consistency, completeness, and reliability.</li>
+      <li>Contributed to an AI-assisted proof of concept for automated data validation workflows.</li>
+    </div></div>
+  </div>
+
+  <div class="role" data-r="1">
+    <div class="role-head"><span class="when">Apr – Aug 2026</span>
+      <div><h3>Research Assistant — Product Design & AI Integration</h3><span class="org">Gies College of Business, UIUC</span></div>
+      <span class="chev">+</span></div>
+    <div class="role-body"><div class="role-body-in">
+      <li>Designed and built Supply Rush solo, start to finish, using an AI-accelerated workflow, now used by a professor to teach students.</li>
+      <li>Modeled truck/drone allocation and capacity planning under randomized market disruptions, then built linear-programming benchmarks to check the results.</li>
+      <li>Added KPI tracking, 10+ market events, and instructor customization tools.</li>
+      <div class="role-links"><a href="https://supply-rush.onrender.com/" target="_blank">Live demo →</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank">Source →</a></div>
+    </div></div>
+  </div>
+
+  <div class="role" data-r="2">
+    <div class="role-head"><span class="when">Jan – May 2026</span>
+      <div><h3>Product & Technology Lead</h3><span class="org">Business Intelligence Group (BIG), UIUC</span></div>
+      <span class="chev">+</span></div>
+    <div class="role-body"><div class="role-body-in">
+      <li>Led a 6-person cross-functional team to deliver a full-stack proof of concept for a multi-university organization managing employment for people in rehabilitation.</li>
+      <li>Coded across the stack (React + Java), deployed the POC on AWS EC2, and wired the database into Tableau for reporting.</li>
+      <li>Mapped a phased delivery roadmap, hit 95% of milestones, and built Python ETL pipelines plus Power BI dashboards.</li>
+    </div></div>
+  </div>
+
+  <div class="role" data-r="3">
+    <div class="role-head"><span class="when">Aug 2021 – Aug 2025</span>
+      <div><h3>Software Development Engineer</h3><span class="org">Infosys · Pune, India · 4 yr 1 mo</span></div>
+      <span class="chev">+</span></div>
+    <div class="role-body"><div class="role-body-in">
+      <li>Engineered 17+ REST APIs (Java, Spring Boot) in a distributed microservices architecture for banking workflows, with CI/CD via OpenShift, Docker, Jenkins.</li>
+      <li>Added Kafka-based async processing; response times dropped ~30% in testing.</li>
+      <li>Wrote the test coverage myself and cut the staging defect rate ~40%; led a 6-engineer team through 8 sprints at 95% velocity.</li>
+      <li>Wrote the API specs and onboarding docs on my own, cutting new-engineer ramp-up ~40%. Won the Infosys Insta Award for it.</li>
+    </div></div>
+  </div>
+
+  <div class="role" data-r="4">
+    <div class="role-head"><span class="when">Jul 2019 – Jul 2020</span>
+      <div><h3>Head of Programme Management</h3><span class="org">IEEE Student Branch · Pune, India</span></div>
+      <span class="chev">+</span></div>
+    <div class="role-body"><div class="role-body-in">
+      <li>Planned and ran 15+ workshops and events for a 200-member org, averaging 50+ attendees each.</li>
+      <li>Set up and troubleshot the A/V and hardware myself, and managed budgets across internal funding and sponsorships.</li>
+      <li>Inherited a 5-person coordinator team and managed it with OKRs.</li>
+    </div></div>
+  </div>
+</section>
+
+<div class="impact-band" id="impactBand">
+  <p class="stmt" id="impactStmt">Four years learning what breaks at scale. Now I spend it reviewing every line an AI writes before it ships, not just the ones I write myself.</p>
+</div>
+
+<section id="projects" class="wrap">
+  <div class="section-title">Projects</div>
+  <div class="proj-grid">
+    <div class="proj-card spot"><div class="proj-tag">Python · FastAPI · Solo</div><h4>Supply Rush</h4>
+      <p>A full-stack supply-chain simulation, built solo with an AI-accelerated workflow, now used by a professor to teach students.</p>
+      <div class="proj-links"><a href="https://supply-rush.onrender.com/" target="_blank">Live</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">LangChain · ChromaDB · OpenAI</div><h4>RAG Chatbot System</h4>
+      <p>A 13-module retrieval pipeline built to find the right chunk, not just a similar one: multi-query retrieval, reciprocal rank fusion, cross-encoder reranking.</p>
+      <div class="proj-links"><a href="https://github.com/omkarchougule19/ragSystem" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">FastAPI · SQLite · LangChain</div><h4>UIUC Course Explorer</h4>
+      <p>A scraper that never loses its place, feeding a LangChain agent that writes and runs its own SQL to answer plain-English questions.</p>
+      <div class="proj-links"><a href="https://course-explorer-agent.onrender.com/" target="_blank">Live</a><a href="https://github.com/omkarchougule19/course-explorer-agent" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">Python ETL · Power BI · Team of 3</div><h4>EV Market Intelligence</h4>
+      <p>ETL pipelines on public EV market data, modeled into a proper star schema, cut the team's analysis turnaround 40%.</p>
+      <div class="proj-links"><a href="https://github.com/omkarchougule19/EV-Market-Intelligence-Analytics-System" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">Product Strategy · UIUC IS534</div><h4>FitSense & StyleFlow</h4>
+      <p>PM'd a 5-person team on AI product strategy for Lululemon: a privacy-preserving sizing tool and an outfit-recommendation engine that explains its picks.</p></div>
+    <div class="proj-card spot"><div class="proj-tag">Java · Android · Firebase</div><h4>JusMath</h4>
+      <p>A published Android aptitude-prep app, 500+ questions and a timed quiz mode, 300 verified active users via Firebase Analytics.</p></div>
+  </div>
+</section>
+
+<section id="skills" class="wrap skills-net">
+  <canvas id="skillsCanvas"></canvas>
+  <div class="section-title">Toolbox</div>
+  <div class="skill-groups">
+    <div class="skill-grp"><div class="lbl">Languages</div><div class="chips">
+      <span class="chip">Java</span><span class="chip">Python</span><span class="chip">JavaScript / TS</span><span class="chip">SQL</span></div></div>
+    <div class="skill-grp"><div class="lbl">Backend & Systems</div><div class="chips">
+      <span class="chip">Spring Boot</span><span class="chip">Microservices</span><span class="chip">FastAPI</span><span class="chip">React</span></div></div>
+    <div class="skill-grp"><div class="lbl">Data & Messaging</div><div class="chips">
+      <span class="chip">Kafka</span><span class="chip">PostgreSQL</span><span class="chip">Power BI</span><span class="chip">Redis</span></div></div>
+    <div class="skill-grp"><div class="lbl">Cloud & DevOps</div><div class="chips">
+      <span class="chip">AWS EC2</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">CI/CD</span></div></div>
+    <div class="skill-grp"><div class="lbl">AI / Agentic Tooling</div><div class="chips">
+      <span class="chip">LangChain</span><span class="chip">Claude Code</span><span class="chip">Gemini</span></div></div>
+    <div class="skill-grp"><div class="lbl">Product & PM</div><div class="chips">
+      <span class="chip">Roadmapping</span><span class="chip">Agile / Scrum</span><span class="chip">PRDs</span></div></div>
+  </div>
+</section>
+
+<section id="education" class="wrap">
+  <div class="section-title">Education & Certifications</div>
+  <div class="edu-grid">
+    <div class="edu-card spot"><div class="when">Aug 2025 – May 2027</div><h4>M.S. Information Management (MSIM)</h4>
+      <div class="org">University of Illinois iSchool, Urbana–Champaign</div>
+      <p>Coursework: Advanced AI Applications, Machine Learning, Database Management Systems, Data Warehousing and Power BI, Data Visualization.</p></div>
+    <div class="edu-card spot"><div class="when">Aug 2017 – Jun 2021</div><h4>B.E. Computer Science</h4>
+      <div class="org">Savitribai Phule Pune University</div>
+      <p>Hack With Infy Hackathon, finished in the top 10% nationally out of thousands of entries.</p></div>
+    <div class="edu-card spot" style="grid-column:1/-1"><h4>Certifications</h4>
+      <p>Google Project Management Certificate (2022) · MTA: Intro to Programming Using JavaScript (2019)</p></div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="contact-card spot">
+    <canvas id="tokenCanvas"></canvas>
+    <h2 style="position:relative;z-index:1">Let's build something.</h2>
+    <p>Open to full-time and internship roles in backend engineering, AI/ML, and forward-deployed engineering.</p>
+    <div class="contact-links">
+      <a href="mailto:okc2@illinois.edu">okc2@illinois.edu</a>
+      <a href="tel:2174021588">(217) 402-1588</a>
+      <a href="https://linkedin.com/in/omkarchougule23" target="_blank">LinkedIn</a>
+      <a href="https://github.com/omkarchougule19" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">Omkar Chougule · Champaign, IL · Open to relocate</footer>
+
 <script>
-document.querySelectorAll('[data-tl]').forEach(item => {
-  item.querySelector('.tl-head').addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('[data-tl]').forEach(o => o.classList.remove('open'));
-    if(!isOpen) item.classList.add('open');
+/* cursor spotlight on project cards */
+document.querySelectorAll('.spot').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    el.style.setProperty('--my', (e.clientY-r.top)+'px');
   });
 });
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+
+/* accordion */
+document.querySelectorAll('.role-head').forEach(h=>{
+  h.addEventListener('click',()=>{
+    const role=h.parentElement;
+    document.querySelectorAll('.role').forEach(r=>{if(r!==role) r.classList.remove('open')});
+    role.classList.toggle('open');
   });
 });
+
+/* typing line */
+const tools=["Claude Code","Gemini","LangChain","ChromaDB","Spring Boot","Kafka"];
+const typeEl=document.getElementById('typeLine');
+let ti=0, ci=0, deleting=false;
+function typeTick(){
+  const word=tools[ti];
+  if(!deleting){ ci++; if(ci>word.length){ deleting=true; setTimeout(typeTick,1200); return; } }
+  else { ci--; if(ci===0){ deleting=false; ti=(ti+1)%tools.length; } }
+  typeEl.innerHTML = word.slice(0,ci) + '<span class="cursor"></span>';
+  setTimeout(typeTick, deleting?40:80);
+}
+typeTick();
+
+/* neural network hero canvas */
+const canvas=document.getElementById('neuralCanvas'), ctx=canvas.getContext('2d');
+const layers=[5,8,8,6,4]; let nodes=[];
+function layout(){
+  nodes=[];
+  const w=canvas.width,h=canvas.height;
+  const margin=w*0.06, usable=w-margin*2;
+  layers.forEach((count,li)=>{
+    const x = margin + usable*(li/(layers.length-1));
+    for(let i=0;i<count;i++){
+      nodes.push({x:x+(Math.random()-.5)*14, y:(h/(count+1))*(i+1)+ (Math.random()-.5)*12, li, phase:Math.random()*6.28});
+    }
+  });
+}
+function rs(){canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight; layout();}
+rs(); window.addEventListener('resize',rs);
+let mx=-999,my=-999;
+const heroEl=document.querySelector('.hero');
+heroEl.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top;});
+heroEl.addEventListener('mouseleave',()=>{mx=-999;my=-999;});
+function draw(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<nodes.length;i++){
+    const a=nodes[i];
+    nodes.filter(b=>b.li===a.li+1).forEach(b=>{
+      const d=Math.hypot(a.x-mx,a.y-my)+Math.hypot(b.x-mx,b.y-my);
+      const near = d<340;
+      ctx.strokeStyle= near? "rgba(138,107,62,0.32)" : "rgba(138,107,62,0.09)";
+      ctx.lineWidth = near? 1.2 : 0.8;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    });
+  }
+  nodes.forEach(n=>{
+    const pulse=0.5+0.5*Math.sin(t/900+n.phase);
+    const distMouse=Math.hypot(n.x-mx,n.y-my);
+    const boost = distMouse<130 ? (1-distMouse/130) : 0;
+    ctx.beginPath(); ctx.arc(n.x,n.y,2+pulse*1.6+boost*3,0,7);
+    ctx.fillStyle=`rgba(138,107,62,${0.28+pulse*0.32+boost*0.4})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+/* impact band: scroll-triggered lit statement */
+const impactObs = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting) document.getElementById('impactStmt').classList.add('lit');
+}), {threshold:.5});
+impactObs.observe(document.getElementById('impactBand'));
+
+/* skills backdrop: faint drifting connective nodes, brighten near hovered chip */
+(function(){
+  const c=document.getElementById('skillsCanvas'); if(!c) return;
+  const sctx=c.getContext('2d');
+  function rs(){ c.width=c.offsetWidth; c.height=c.offsetHeight; }
+  const section=document.getElementById('skills');
+  new ResizeObserver(rs).observe(section); rs();
+  let pts=[]; for(let i=0;i<26;i++) pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0003});
+  let hoverChip=null, visible=false;
+  new IntersectionObserver(es=>es.forEach(e=>visible=e.isIntersecting),{threshold:.05}).observe(section);
+  document.querySelectorAll('#skills .chip').forEach(ch=>{
+    ch.addEventListener('mouseenter',()=>hoverChip=ch);
+    ch.addEventListener('mouseleave',()=>{ if(hoverChip===ch) hoverChip=null; });
+  });
+  function draw(){
+    if(!visible){ requestAnimationFrame(draw); return; }
+    if(c.width!==section.offsetWidth) rs();
+    sctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>1)p.vx*=-1; if(p.y<0||p.y>1)p.vy*=-1; });
+    let boostX=-999, boostY=-999;
+    if(hoverChip){ const r=hoverChip.getBoundingClientRect(), sr=section.getBoundingClientRect();
+      boostX=(r.left+r.width/2-sr.left)/c.width; boostY=(r.top+r.height/2-sr.top)/c.height; }
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i], b=pts[j], d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<0.16){ sctx.strokeStyle="rgba(138,107,62,0.07)"; sctx.lineWidth=1;
+        sctx.beginPath(); sctx.moveTo(a.x*c.width,a.y*c.height); sctx.lineTo(b.x*c.width,b.y*c.height); sctx.stroke(); }
+    }
+    pts.forEach(p=>{
+      const near = Math.hypot(p.x-boostX,p.y-boostY) < 0.12;
+      sctx.beginPath(); sctx.arc(p.x*c.width,p.y*c.height, near?2.4:1.1, 0, 7);
+      sctx.fillStyle = near? "rgba(138,107,62,0.7)" : "rgba(138,107,62,0.18)"; sctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* contact card: drifting token stream */
+(function(){
+  const c=document.getElementById('tokenCanvas'); if(!c) return;
+  const tctx=c.getContext('2d');
+  const card=document.querySelector('.contact-card');
+  function rs(){ c.width=card.offsetWidth; c.height=card.offsetHeight; }
+  new ResizeObserver(rs).observe(card); rs();
+  const words=["REST","Kafka","LangChain","FastAPI","Spring Boot","AWS EC2","Power BI","Docker","SQL","Claude"];
+  let toks = words.map((w,i)=>({w, x:Math.random()*1, y:(i/words.length)+Math.random()*0.05, s:0.7+Math.random()*0.5}));
+  let visible=false;
+  new IntersectionObserver(es=>es.forEach(e=>visible=e.isIntersecting),{threshold:.05}).observe(card);
+  function draw(){
+    if(!visible){ requestAnimationFrame(draw); return; }
+    tctx.clearRect(0,0,c.width,c.height);
+    tctx.font="11px 'IBM Plex Mono', monospace";
+    toks.forEach(t=>{
+      t.x += 0.0004*t.s;
+      if(t.x>1.15) t.x=-0.15;
+      tctx.fillStyle=`rgba(242,241,236,${0.12+0.08*t.s})`;
+      tctx.fillText(t.w, t.x*c.width, t.y*c.height);
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
 </script>
 </body>
 </html>
