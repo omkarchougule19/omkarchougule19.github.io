@@ -89,6 +89,7 @@ section{position:relative;z-index:2;padding:80px 0}
 
 /* PROJECTS */
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj-card:nth-child(3n+1):last-child{grid-column:2}
 .proj-card{background:var(--bg-raised);border:1px solid var(--line);border-radius:4px;padding:24px;transition:border-color .2s, transform .2s}
 .proj-card:hover{border-color:var(--accent);transform:translateY(-3px)}
 .proj-tag{font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
@@ -268,15 +269,18 @@ footer{padding:40px 0;text-align:center;font-family:var(--mono);font-size:11px;c
 <section id="projects" class="wrap">
   <div class="section-title">Projects</div>
   <div class="proj-grid">
-    <div class="proj-card spot"><div class="proj-tag">Python · FastAPI · Solo</div><h4>Supply Rush</h4>
-      <p>A full-stack supply-chain simulation, built solo with an AI-accelerated workflow, now used by a professor to teach students.</p>
-      <div class="proj-links"><a href="https://supply-rush.onrender.com/" target="_blank">Live</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank">Source</a></div></div>
-    <div class="proj-card spot"><div class="proj-tag">LangChain · ChromaDB · OpenAI</div><h4>RAG Chatbot System</h4>
-      <p>A 13-module retrieval pipeline built to find the right chunk, not just a similar one: multi-query retrieval, reciprocal rank fusion, cross-encoder reranking.</p>
-      <div class="proj-links"><a href="https://github.com/omkarchougule19/ragSystem" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">Python · OpenRouter · pytest</div><h4>Jev-Guard</h4>
+      <p>An LLM output validator that swaps the usual "ask another LLM to grade it" step for Jev, a decision-only model: matched a GPT-4o-mini baseline's accuracy while running 3x faster.</p>
+      <div class="proj-links"><a href="https://github.com/omkarchougule19/Jev_validation_agent" target="_blank">Source</a></div></div>
     <div class="proj-card spot"><div class="proj-tag">FastAPI · SQLite · LangChain</div><h4>UIUC Course Explorer</h4>
       <p>A scraper that never loses its place, feeding a LangChain agent that writes and runs its own SQL to answer plain-English questions.</p>
       <div class="proj-links"><a href="https://course-explorer-agent.onrender.com/" target="_blank">Live</a><a href="https://github.com/omkarchougule19/course-explorer-agent" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">LangChain · ChromaDB · OpenAI</div><h4>RAG Chatbot System</h4>
+      <p>A 13-module retrieval pipeline built to find the right chunk, not just a similar one: multi-query retrieval, reciprocal rank fusion, cross-encoder reranking.</p>
+      <div class="proj-links"><a href="https://github.com/omkarchougule19/ragSystem" target="_blank">Source</a></div></div>
+    <div class="proj-card spot"><div class="proj-tag">Python · FastAPI · Supabase</div><h4>Supply Rush</h4>
+      <p>A full-stack supply-chain simulation, built solo with an AI-accelerated workflow, now used by a professor to teach students.</p>
+      <div class="proj-links"><a href="https://supply-rush.onrender.com/" target="_blank">Live</a><a href="https://github.com/omkarchougule19/supply-rush" target="_blank">Source</a></div></div>
     <div class="proj-card spot"><div class="proj-tag">Python ETL · Power BI · Team of 3</div><h4>EV Market Intelligence</h4>
       <p>ETL pipelines on public EV market data, modeled into a proper star schema, cut the team's analysis turnaround 40%.</p>
       <div class="proj-links"><a href="https://github.com/omkarchougule19/EV-Market-Intelligence-Analytics-System" target="_blank">Source</a></div></div>
@@ -284,9 +288,6 @@ footer{padding:40px 0;text-align:center;font-family:var(--mono);font-size:11px;c
       <p>PM'd a 5-person team on AI product strategy for Lululemon: a privacy-preserving sizing tool and an outfit-recommendation engine that explains its picks.</p></div>
     <div class="proj-card spot"><div class="proj-tag">Java · Android · Firebase</div><h4>JusMath</h4>
       <p>A published Android aptitude-prep app, 500+ questions and a timed quiz mode, 300 verified active users via Firebase Analytics.</p></div>
-    <div class="proj-card spot"><div class="proj-tag">Python · OpenRouter · Solo</div><h4>Jev-Guard</h4>
-      <p>An LLM output validator that swaps the usual "ask another LLM to grade it" step for Jev, a decision-only model: matched a GPT-4o-mini baseline's accuracy while running 3x faster.</p>
-      <div class="proj-links"><a href="https://github.com/omkarchougule19/Jev_validation_agent" target="_blank">Source</a></div></div>
   </div>
 </section>
 
